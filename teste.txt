@@ -1,0 +1,14 @@
+Prática
+
+1.Crie uma conta no Github
+2.Crie um repositorio com o nome de de testeGit
+3.Crie uma pasta chamada teste
+4.Crie um arquivo chamada teste.txt
+5.Inicialize o repositório na pasta teste
+6.Associe o repositório local ao repositório do Github
+7.Saia da pasta teste e crie a pasta teste2
+8.Dentro da pasta teste2 clone o repositório do
+Github
+9.Crie uma feature e commit uma alteração
+10.Crie uma release e commit
+11.Crie um hotfix e commit uma alteração
