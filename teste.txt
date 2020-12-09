@@ -12,3 +12,4 @@ Github
 9.Crie uma feature e commit uma alteração
 10.Crie uma release e commit
 11.Crie um hotfix e commit uma alteração
+12.Comemore!
