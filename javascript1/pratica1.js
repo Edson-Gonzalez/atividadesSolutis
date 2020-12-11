@@ -7,23 +7,15 @@ quantos deles estão fora deste intervalo.*/
 
 //Comentar se necessário.
 function createArray(){
-    const values = [];
-    for (let i=0; i<10; i++){
-        values[i] = Math.floor(Math.random() * 30);
-    }
-    return values;
+    return new Array(10).fill(null).map(() => Math.floor(Math.random() * 30));
 }
+
+var yes = 0, no = 0;
 
 const lista = createArray();
 
-var yes=0, no=0;
+lista.map((current) => 
+current>10 && current<20 ? yes++ : no++ )
 
-for (let i=0; i<10; i++){
-    if (lista[i]>10 && lista[i]<20){
-        yes++;
-    }else{
-        no++;
-    }
-}
 console.log(lista);
 console.log("Estão: " + yes);

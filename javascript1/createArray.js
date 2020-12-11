@@ -1,7 +1,3 @@
-export default function createArray(){
-    const values = [];
-    for (let i=0; i<10; i++){
-        values[i] = Math.floor(Math.random() * 30);
-    }
-    return values;
+function createArray(){
+    return new Array(10).fill(null).map(() => Math.floor(Math.random() * 30));
 }

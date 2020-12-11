@@ -7,20 +7,13 @@ correspondentes dos vetores A e B.*/
 
 //Comentar se necessário.
 function createArray(){
-    const values = [];
-    for (let i=0; i<10; i++){
-        values[i] = Math.floor(Math.random() * 30);
-    }
-    return values;
+    return new Array(10).fill(null).map(() => Math.floor(Math.random() * 30));
 }
 
 const listaA = createArray();
 const listaB = createArray();
-const listaC = [];
-
-for (let i=0; i<10; i++){
-    listaC[i] = listaA[i] * listaB[i];
-}
+const listaC = new Array(10).fill(null).map((current, index) => 
+    current = listaB[index] * listaA[index]);
 
 console.log(listaA);
 console.log(listaB);
