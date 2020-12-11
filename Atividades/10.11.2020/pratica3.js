@@ -1,11 +1,3 @@
-/*Crie duas listas de 10 posições e crie uma
-terceira lista contendo, nas posições pares os
-valores do primeira lista e nas posições
-impares os valores do segunda lista.*/
-
-//import { createArray } from "createArray.js"
-
-//Comentar se necessário.
 function createArray(){
     return new Array(10).fill(null).map(() => Math.floor(Math.random() * 30));
 }

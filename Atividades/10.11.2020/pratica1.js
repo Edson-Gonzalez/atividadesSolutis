@@ -1,11 +1,3 @@
-/*Crie um lista com 10 valores e escreva 
-quantos desses valores lidos estão no intervalo [10,20]
-(inlcuindo os valores 10 e 20 no intervalo) e
-quantos deles estão fora deste intervalo.*/
-
-//import { createArray } from "createArray.js"
-
-//Comentar se necessário.
 function createArray(){
     return new Array(10).fill(null).map(() => Math.floor(Math.random() * 30));
 }
