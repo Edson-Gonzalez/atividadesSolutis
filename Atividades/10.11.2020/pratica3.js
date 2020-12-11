@@ -7,6 +7,5 @@ const listaB = createArray();
 const listaC = new Array(10).fill(null).map((current, index) => index%2 == 0 ? 
     current = listaB[index] : current = listaA[index]);
 
-console.log(listaA);
-console.log(listaB);
-console.log(listaC);
+const table = [listaA, listaB, listaC];
+console.table(table);
