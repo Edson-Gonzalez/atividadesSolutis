@@ -4,30 +4,58 @@ const app = express();
 const bodyparser = require('body-parser');
 app.use(bodyparser.urlencoded({ extended: true}));
 
-app.listen(4000, function(){
-    console.log('Servidor rodando na porta 4000');
+app.set('view engine', 'ejs')
+
+const ObjectId = require('mongodb').ObjectID
+ 
+const MongoClient = require('mongodb').MongoClient
+const uri = "mongodb+srv://edson:KsFxcSVXJpPPtJ6F@cluster0.kppho.mongodb.net/cursoReact_Solutis?retryWrites=true&w=majority";
+ 
+MongoClient.connect(uri, { useUnifiedTopology: true, useNewUrlParser: true }, (err, client) => {
+  if (err) return console.log(err)
+  db = client.db('cursoReact_Solutis') // coloque o nome do seu DB
+ 
+  app.listen(4000, () => {
+    console.log('Servidor rodando na porta 4000')
+  })
 })
 
+//Menu
 app.get('/', (req, res) => {
-    var cursor = db.collection('usuario').find();
     res.render('index.ejs');
 })
- 
-app.get('/show', (req, res) => {
+
+//Users Pages
+app.get('/users', (req, res) => {
     db.collection('usuario').find().toArray((err, results) => {
         if (err) return console.log(err)
-        res.render('show.ejs', { data: results })
+        res.render('users/list.ejs', { data: results })
  
     })
 })
 
-app.route('/edit/:id')
+app.get('/register', (req, res) => {
+    var cursor = db.collection('usuario').find();
+    res.render('users/register.ejs');
+})
+
+app.post('/users', function(req, res){
+    console.log('Teste post...')
+    db.collection('usuario').save(req.body, (err, result) => {
+        if (err) return console.log(err)
+     
+        console.log('Salvo no Banco de Dados')
+        res.redirect('/users')
+      })
+});
+
+app.route('/edituser/:id')
     .get((req, res) => {
     var id = req.params.id
     
     db.collection('usuario').find(ObjectId(id)).toArray((err, result) => {
         if (err) return res.send(err)
-        res.render('edit.ejs', { data: result })
+        res.render('users/edit.ejs', { data: result })
     })
     })
     .post((req, res) => {
@@ -42,7 +70,7 @@ app.route('/edit/:id')
         }
     }, (err, result) => {
         if (err) return res.send(err)
-        res.redirect('/show')
+        res.redirect('/users')
         console.log('Atualizado no Banco de Dados')
     })
     })
@@ -54,32 +82,68 @@ app.route('/delete/:id')
       db.collection('usuario').deleteOne({_id: ObjectId(id)}, (err, result) => {
         if (err) return res.send(500, err)
         console.log('Deletado do Banco de Dados!')
-        res.redirect('/show')
+        res.redirect('/users')
       })
     })
 
-app.post('/show', function(req, res){
-    console.log('Teste post...')
-    db.collection('usuario').save(req.body, (err, result) => {
+//Product Pages
+app.get('/products', (req, res) => {
+    db.collection('produto').find().toArray((err, results) => {
         if (err) return console.log(err)
-     
+        res.render('products/list.ejs', { data: results })
+    
+    })
+})
+
+app.get('/registerproduct', (req, res) => {
+    var cursor = db.collection('produto').find();
+    res.render('products/register.ejs');
+})
+
+app.post('/products', function(req, res){
+    console.log('Teste post...')
+    req.body.date = new Date();
+    db.collection('produto').save(req.body, (err, result) => {
+        if (err) return console.log(err)
+        
         console.log('Salvo no Banco de Dados')
-        res.redirect('/show')
-      })
+        res.redirect('/products')
+        })
 });
 
-app.set('view engine', 'ejs')
+app.route('/editproduct/:id')
+    .get((req, res) => {
+    var id = req.params.id
+    
+    db.collection('produto').find(ObjectId(id)).toArray((err, result) => {
+        if (err) return res.send(err)
+        res.render('products/edit.ejs', { data: result })
+    })
+    })
+    .post((req, res) => {
+    var id = req.params.id
+    var name = req.body.name
+    var price = req.body.price
+    
+    db.collection('produto').updateOne({_id: ObjectId(id)}, {
+        $set: {
+        name,
+        price
+        }
+    }, (err, result) => {
+        if (err) return res.send(err)
+        res.redirect('/products')
+        console.log('Atualizado no Banco de Dados')
+    })
+    })
 
-const ObjectId = require('mongodb').ObjectID
- 
-const MongoClient = require('mongodb').MongoClient
-const uri = "mongodb+srv://edson:KsFxcSVXJpPPtJ6F@cluster0.kppho.mongodb.net/cursoReact_Solutis?retryWrites=true&w=majority";
- 
-MongoClient.connect(uri, (err, client) => {
-  if (err) return console.log(err)
-  db = client.db('cursoReact_Solutis') // coloque o nome do seu DB
- 
-  app.listen(3000, () => {
-    console.log('Server running on port 3000')
-  })
-})
+app.route('/deleteproduct/:id')
+    .get((req, res) => {
+        var id = req.params.id
+        
+        db.collection('produto').deleteOne({_id: ObjectId(id)}, (err, result) => {
+        if (err) return res.send(500, err)
+        console.log('Deletado do Banco de Dados!')
+        res.redirect('/products')
+        })
+    })
