@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Produtos</title>
+</head>
+<body>
+ 
+<h2>Produtos</h2>
+  <table border="1">
+    <thead>
+        <tr>
+            <td>Nome</td>
+            <td>Preço</td>
+            <td>Ação</td>
+        </tr>
+    </thead>
+    <tbody>
+    <% data.forEach(function(details) { %>
+        <tr>
+            <td><%= details.name %></td>
+            <td>R$ <%= details.price %></td>
+            <td><a href="/editproduct/<%= details._id %>">Editar</a> - <a href="/deleteproduct/<%= details._id %>">Deletar</a></td>
+        </tr>
+        <% }) %>
+    </tbody>
+  </table>
+  <button><a href="/registerproduct">Novo</a></button>
+  <button><a href="/">Voltar</a></button>
+</body>
+</html>

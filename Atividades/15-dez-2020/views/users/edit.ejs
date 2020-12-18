@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Editar Usuário</title>
+</head>
+<body>
+ 
+<h2>Editar Usuário</h2>
+  <% data.forEach(function(details) { %>
+    <form action="/edituser/<%= details._id %>" method="POST">
+      <input type="text" value="<%= details.name %>" name="name" required="required">
+      <br />
+      <input type="text" value="<%= details.surname %>" name="surname" required="required">
+      <br />
+      <button><a href="/users">Voltar</a></button>
+      <button type="submit">Editar</button>
+    </form>
+  <% }) %>
+
+</body>
+</html>
