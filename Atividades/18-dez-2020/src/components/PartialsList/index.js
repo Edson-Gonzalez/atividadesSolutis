@@ -1,12 +1,12 @@
 const PartialsList = ({Partial}) => {
     return (
-      <div>
+      <ul>
         {
             Partial.map((e)=>{
-                return (<p>{e.hours+":"+e.minutes+":"+e.seconds+":"+e.hundredth}</p>)
+                return (<li>{e.hours+":"+e.minutes+":"+e.seconds+":"+e.hundredth}</li>)
             })
         }
-      </div>
+      </ul>
   )
 }
 

@@ -1,12 +1,14 @@
 import Clock from "./components/Clock";
 import MainCounter from "./components/MainCounter";
+import Timer from "./components/Timer"
 import './App.css';
 
 const App = () => {
   return (
-    <div>
+    <div style={{display:"flex"}}>
       <Clock/>
-      <MainCounter/>
+      <MainCounter/>  
+      <Timer/>
     </div>
   );
 }
